@@ -36,7 +36,10 @@ public class BoardTest {
         assertEquals(0, board.getAvailableSpaces().size());
     }
 
-
-
+    @Test
+    public void takeTurn() {
+        board.placeMarker(1, "X");
+        assertEquals("X", board.getSpaces().get(0));
+    }
 
 }

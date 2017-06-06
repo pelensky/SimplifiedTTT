@@ -13,7 +13,12 @@ class Board {
     this.spaces = setUpBoard(size);
   }
 
-  List<String> getSpaces() {
+  void placeMarker(int space, String marker) {
+    spaces.set(space - offset, marker);
+  }
+
+
+    List<String> getSpaces() {
     return spaces;
   }
 
