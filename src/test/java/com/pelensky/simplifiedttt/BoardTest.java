@@ -42,4 +42,11 @@ public class BoardTest {
         assertEquals("X", board.getSpaces().get(0));
     }
 
+    @Test
+    public void cantPutAMarkerSomewhereTaken() {
+        board.placeMarker(2, "X");
+        board.placeMarker(2, "O");
+        assertEquals("X", board.getSpaces().get(1));
+    }
+
 }

@@ -5,7 +5,6 @@ import java.util.List;
 
 class Board {
 
-
   List<String> spaces;
   private final int offset = 1;
 
@@ -14,11 +13,12 @@ class Board {
   }
 
   void placeMarker(int space, String marker) {
-    spaces.set(space - offset, marker);
+    if (isSpaceAvailable(space)) {
+      spaces.set(space - offset, marker);
+    }
   }
 
-
-    List<String> getSpaces() {
+  List<String> getSpaces() {
     return spaces;
   }
 
