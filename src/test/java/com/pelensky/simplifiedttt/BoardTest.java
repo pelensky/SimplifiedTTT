@@ -25,5 +25,18 @@ public class BoardTest {
         assertEquals(16, bigBoard.getSpaces().size());
     }
 
+    @Test
+    public void allSpacesAreAvailableWhenBoardIsInitialized() {
+        assertEquals(9, board.getAvailableSpaces().size());
+    }
+
+    @Test
+    public void getAvailableSpacesReturnsZeroWhenFull() {
+        board.spaces = new ArrayList<>(Arrays.asList("O", "X", "O", "X", "O", "X", "X", "O", "X"));
+        assertEquals(0, board.getAvailableSpaces().size());
+    }
+
+
+
 
 }
