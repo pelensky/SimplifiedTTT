@@ -1,3 +1,6 @@
+[![Build Status](https://travis-ci.org/pelensky/SimplifiedTTT.svg?branch=master)](https://travis-ci.org/pelensky/SimplifiedTTT)
+[![Coverage Status](https://coveralls.io/repos/github/pelensky/SimplifiedTTT/badge.svg?branch=master)](https://coveralls.io/github/pelensky/SimplifiedTTT?branch=master)
+
 ## Java Tic Tac Toe 
 
 This is a simplified Tic Tac Toe game built in Java:
