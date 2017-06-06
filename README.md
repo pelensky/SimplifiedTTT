@@ -7,8 +7,6 @@ There are three types of players, and a game can be played by any of them:
 2. Easy Computer
 3. Perfect Computer
 
-At this stage, the computer player selects a random available space, it does not implement the Minimax algorithm.
-
 #### Prerequisites 
 1. Install [Java](http://www.oracle.com/technetwork/java/javase/downloads/index.html)
 
