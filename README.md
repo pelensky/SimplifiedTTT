@@ -3,12 +3,18 @@
 
 ## Java Tic Tac Toe 
 
-This is a simplified Tic Tac Toe game built in Java:
+This is a simplified Tic Tac Toe game built in Java. My challenge is to create a Tic Tac Toe game with only the following:
+* Board class
+* Player interface
+  * Human player
+  * Computer player
+* Game class
+* CLI Game
 
-There are three types of players, and a game can be played by any of them:
+
+There are two types of players, and a game can be played by any combination of them:
 1. Human
-2. Easy Computer
-3. Perfect Computer
+2. Computer
 
 #### Prerequisites 
 1. Install [Java](http://www.oracle.com/technetwork/java/javase/downloads/index.html)
