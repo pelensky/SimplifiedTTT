@@ -11,7 +11,6 @@ This is a simplified Tic Tac Toe game built in Java. My challenge is to create a
 * Game class
 * CLI Game
 
-
 There are two types of players, and a game can be played by any combination of them:
 1. Human
 2. Computer
