@@ -11,23 +11,22 @@ import static org.junit.Assert.assertEquals;
 
 public class PlayerTest {
 
-    private Player human;
-    private Player computer;
-    private CLI cli;
+  private Player human;
+  private Player computer;
+  private CLI cli;
 
-    @Before
-    public void setUp() {
-        Scanner in = new Scanner(System.in);
-        PrintStream out = new PrintStream(new ByteArrayOutputStream());
-        cli = new CLI(in, out);
-        human = new HumanPlayer(cli, "X");
-        computer = new ComputerPlayer("O");
-    }
+  @Before
+  public void setUp() {
+    Scanner in = new Scanner(System.in);
+    PrintStream out = new PrintStream(new ByteArrayOutputStream());
+    cli = new CLI(in, out);
+    human = new HumanPlayer(cli, "X");
+    computer = new ComputerPlayer("O");
+  }
 
-    @Test
-    public void playerInitializedWithAMarker() {
-        assertEquals("X", human.getMarker());
-        assertEquals("O", computer.getMarker());
-    }
-
+  @Test
+  public void playerInitializedWithAMarker() {
+    assertEquals("X", human.getMarker());
+    assertEquals("O", computer.getMarker());
+  }
 }

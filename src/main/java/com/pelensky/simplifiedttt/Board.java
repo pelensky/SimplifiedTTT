@@ -52,9 +52,7 @@ class Board {
   List<List<String>> getRows() {
     List<List<String>> rows = new ArrayList<>(size);
     for (int i = 0; i < size; i++) {
-      rows.add(
-              new ArrayList<>(
-                      getSpaces().subList(i * size, (size * i) + size)));
+      rows.add(new ArrayList<>(getSpaces().subList(i * size, (size * i) + size)));
     }
     return rows;
   }
