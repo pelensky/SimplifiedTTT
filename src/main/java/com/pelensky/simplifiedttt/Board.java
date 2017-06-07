@@ -45,6 +45,10 @@ class Board {
     return getSpaces().get(space - offset).equals(String.valueOf(space));
   }
 
+  void resetSpace(int space) {
+    spaces.set(space - 1, String.valueOf(space));
+  }
+
   List<List<String>> getRows() {
     List<List<String>> rows = new ArrayList<>(size);
     for (int i = 0; i < size; i++) {

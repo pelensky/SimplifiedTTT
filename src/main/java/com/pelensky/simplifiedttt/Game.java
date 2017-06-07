@@ -5,7 +5,7 @@ import java.util.List;
 
 class Game {
 
-    private final Board board;
+    final Board board;
     private final Player player1;
     private final Player player2;
     private Player currentPlayer;
@@ -31,7 +31,7 @@ class Game {
         return board.getSpaces();
     }
 
-    private void changeCurrentPlayer() {
+    void changeCurrentPlayer() {
         currentPlayer =
                 (currentPlayer.equals(player1)) ? (currentPlayer = player2) : (currentPlayer = player1);
     }
@@ -50,7 +50,7 @@ class Game {
         return false;
     }
 
-    private boolean isGameTied() {
+    boolean isGameTied() {
         return board.getAvailableSpaces().size() == 0 && !isGameWonBy(player1) && !isGameWonBy(player2);
     }
 

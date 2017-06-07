@@ -16,7 +16,7 @@ class HumanPlayer implements Player{
     }
 
     @Override
-    public int chooseSpace() {
+    public int chooseSpace(Game game) {
         return cli.getNumber();
     }
 
