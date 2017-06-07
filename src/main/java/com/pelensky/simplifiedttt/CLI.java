@@ -5,9 +5,10 @@ import java.util.Scanner;
 
 class CLI {
 
-    private Scanner in;
-    private PrintStream out;
-    boolean gameOver = false;
+    private final Scanner in;
+    private final PrintStream out;
+    private Game game;
+
 
     CLI(Scanner in, PrintStream out) {
         this.in = in;
@@ -15,12 +16,29 @@ class CLI {
     }
 
     void gameLoop() {
-        out.println("Tic Tac Toe");
-        out.println("Choose Board Size: 3 or 4");
-        Board board = new Board(getNumber());
+        welcome();
+        setUpGame();
+        printBoard();
+    }
+
+      private void setUpGame() {
+        Board board = chooseBoardSize();
         Player player1 = choosePlayerType(1);
         Player player2 = choosePlayerType(2);
+        game = new Game(board, player1, player2);
+    }
 
+    private Board chooseBoardSize() {
+        printBoardSizeOptions();
+        return new Board(getNumber());
+    }
+
+    private void printBoardSizeOptions() {
+        out.println("Choose Board Size: 3 or 4");
+    }
+
+    private void welcome() {
+        out.println("Tic Tac Toe");
     }
 
     private Player choosePlayerType(int player) {
@@ -43,5 +61,12 @@ class CLI {
         return in.nextInt();
     }
 
+    private void printBoard() {
+        out.println("  1 |  2 |  3" + System.lineSeparator() +
+                "--------------" + System.lineSeparator() +
+                "  4 |  5 |  6" + System.lineSeparator() +
+                "--------------" + System.lineSeparator() +
+                "  7 |  8 |  9" );
+    }
 
 }

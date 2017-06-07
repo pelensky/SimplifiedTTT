@@ -1,6 +1,8 @@
 package com.pelensky.simplifiedttt;
 
 
+import org.hamcrest.CoreMatchers;
+import org.hamcrest.MatcherAssert;
 import org.junit.Test;
 
 import java.io.ByteArrayOutputStream;
@@ -13,13 +15,12 @@ import static org.junit.Assert.assertThat;
 public class CLITest {
 
     private ByteArrayOutputStream output;
-    private CLI cli;
 
     public void setUp(String text){
         Scanner in = new Scanner(text);
         output = new ByteArrayOutputStream();
         PrintStream out = new PrintStream(output);
-        cli = new CLI(in, out);
+        CLI cli = new CLI(in, out);
         cli.gameLoop();
     }
 
@@ -45,6 +46,18 @@ public class CLITest {
     public void choosePlayer2() {
         setUp("3 1 1");
         assertThat(output.toString(), containsString("Choose Player Type for Player 2:" + System.lineSeparator() + "1) Human" + System.lineSeparator() + "2) Computer"));
+    }
+
+    @Test
+    public void printBoard() {
+        setUp("3 1 1");
+        assertThat(
+                output.toString(),
+                containsString("  1 |  2 |  3" + System.lineSeparator() +
+                        "--------------" + System.lineSeparator() +
+                        "  4 |  5 |  6" + System.lineSeparator() +
+                        "--------------" + System.lineSeparator() +
+                        "  7 |  8 |  9" ));
     }
 
 
