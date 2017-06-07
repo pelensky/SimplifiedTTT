@@ -1,5 +1,7 @@
 package com.pelensky.simplifiedttt;
 
+import java.util.List;
+
 class Game {
 
     private final Board board;
@@ -16,5 +18,13 @@ class Game {
 
     Player getCurrentPlayer() {
         return currentPlayer;
+    }
+
+    void takeTurn(int space) {
+        board.placeMarker(space, currentPlayer.getMarker());
+    }
+
+    List<String> showBoard() {
+        return board.getSpaces();
     }
 }
