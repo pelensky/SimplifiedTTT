@@ -2,10 +2,12 @@ package com.pelensky.simplifiedttt;
 
 class HumanPlayer implements Player{
 
-    private String marker;
+    private final String marker;
+    private final CLI cli;
 
-    HumanPlayer(String marker) {
+    HumanPlayer(CLI cli, String marker) {
         this.marker = marker;
+        this.cli = cli;
     }
 
     @Override
@@ -13,7 +15,10 @@ class HumanPlayer implements Player{
         return marker;
     }
 
-
+    @Override
+    public int chooseSpace() {
+        return cli.getNumber();
+    }
 
 
 }

@@ -12,4 +12,9 @@ public class ComputerPlayer implements Player {
     public String getMarker() {
         return marker;
     }
+
+    @Override
+    public int chooseSpace() {
+        return 0;
+    }
 }

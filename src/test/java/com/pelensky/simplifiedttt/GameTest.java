@@ -3,9 +3,12 @@ package com.pelensky.simplifiedttt;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Scanner;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
@@ -20,9 +23,11 @@ public class GameTest {
 
     @Before
     public void setUp() {
-        board = new Board(3);
-        player1 = new HumanPlayer("X");
-        player2 = new HumanPlayer("O");
+        Scanner in = new Scanner(System.in);
+        PrintStream out = new PrintStream(new ByteArrayOutputStream());
+        CLI cli = new CLI(in, out);board = new Board(3);
+        player1 = new HumanPlayer(cli, "X");
+        player2 = new HumanPlayer(cli, "O");
        game = new Game(board, player1, player2);
     }
 
