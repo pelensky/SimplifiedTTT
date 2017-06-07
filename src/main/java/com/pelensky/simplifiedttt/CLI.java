@@ -17,9 +17,11 @@ class CLI {
   }
 
   void run() {
+    clearScreen();
     welcome();
     setUpGame();
     while (!game.isGameOver()) {
+      clearScreen();
       printPlayersTurn();
       printBoard();
       takeTurn();
@@ -128,5 +130,11 @@ class CLI {
     }
     line.append("-").append(System.lineSeparator());
     return line.toString();
+  }
+
+  private void clearScreen() {
+    String CLEAR_SCREEN = "\033[H\033[2J";
+    out.print(CLEAR_SCREEN);
+    out.flush();
   }
 }

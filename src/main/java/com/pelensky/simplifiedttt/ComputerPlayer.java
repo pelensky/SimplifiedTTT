@@ -1,7 +1,9 @@
 package com.pelensky.simplifiedttt;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.Random;
 
 public class ComputerPlayer implements Player {
 
@@ -18,8 +20,12 @@ public class ComputerPlayer implements Player {
 
   @Override
   public int chooseSpace(Game game) {
-    Map<Integer, Integer> bestScore = new HashMap<>();
-    return calculateBestMove(game, 0, bestScore);
+    if (game.getTurnCount() < 5 && game.board.getSpaces().size() > 9) {
+      return chooseRandomSpace(game);
+    } else {
+      Map<Integer, Integer> bestScore = new HashMap<>();
+      return calculateBestMove(game, 0, bestScore);
+    }
   }
 
   private int calculateBestMove(Game game, int depth, Map<Integer, Integer> bestScore) {
@@ -55,5 +61,10 @@ public class ComputerPlayer implements Player {
 
   private int getTopScore(Map<Integer, Integer> bestScore) {
     return bestScore.entrySet().stream().max(Map.Entry.comparingByValue()).get().getValue();
+  }
+
+  private int chooseRandomSpace(Game game) {
+    List<Integer> spaces = game.board.getAvailableSpaces();
+    return spaces.get(new Random().nextInt(spaces.size()));
   }
 }

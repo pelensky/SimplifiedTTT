@@ -10,6 +10,7 @@ class Game {
   private final Player player2;
   private Player currentPlayer;
   private Player winner;
+  private int turnCount = 0;
 
   Game(Board board, Player player1, Player player2) {
     this.board = board;
@@ -20,6 +21,7 @@ class Game {
 
   void takeTurn() {
     board.placeMarker(currentPlayer.chooseSpace(this), currentPlayer.getMarker());
+    turnCount ++;
     changeCurrentPlayer();
   }
 
@@ -65,5 +67,9 @@ class Game {
 
   Player getWinner() {
     return winner;
+  }
+
+  int getTurnCount() {
+    return turnCount;
   }
 }
