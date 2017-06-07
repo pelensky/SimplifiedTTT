@@ -47,7 +47,11 @@ class Game {
   }
 
   boolean isGameTied() {
-    return board.getAvailableSpaces().size() == 0 && !isGameWonBy(player1) && !isGameWonBy(player2);
+    if (board.getAvailableSpaces().size() == 0 && !isGameWonBy(player1) && !isGameWonBy(player2)) {
+      winner = null;
+      return true;
+    }
+    return false;
   }
 
   private List<List<String>> winningCombinations() {
