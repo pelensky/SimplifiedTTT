@@ -25,10 +25,11 @@ public class GameTest {
     public void setUp() {
         Scanner in = new Scanner(System.in);
         PrintStream out = new PrintStream(new ByteArrayOutputStream());
-        CLI cli = new CLI(in, out);board = new Board(3);
+        CLI cli = new CLI(in, out);
+        board = new Board(3);
         player1 = new HumanPlayer(cli, "X");
         player2 = new HumanPlayer(cli, "O");
-       game = new Game(board, player1, player2);
+        game = new Game(board, player1, player2);
     }
 
     private void setSpacesAndCreateGame(List<String> strings) {
@@ -39,25 +40,6 @@ public class GameTest {
     @Test
     public void player1StartsTheGame() {
         assertEquals("X", game.getCurrentPlayer().getMarker());
-    }
-
-    @Test
-    public void playerCanTakeTurn() {
-        game.takeTurn(1);
-        assertEquals("X", game.showBoard().get(0));
-    }
-
-    @Test
-    public void currentPlayerChangesAfterTurn() {
-        game.takeTurn(1);
-        assertEquals("O", game.getCurrentPlayer().getMarker());
-    }
-
-    @Test
-    public void playerTwoCanTakeATurn() {
-        game.takeTurn(1);
-        game.takeTurn(2);
-        assertEquals("O", game.showBoard().get(1));
     }
 
     @Test

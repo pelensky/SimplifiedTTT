@@ -18,8 +18,8 @@ class Game {
         this.currentPlayer = player1;
     }
 
-    void takeTurn(int space) {
-        board.placeMarker(space, currentPlayer.getMarker());
+    void takeTurn() {
+        board.placeMarker(currentPlayer.chooseSpace(this), currentPlayer.getMarker());
         changeCurrentPlayer();
     }
 
@@ -63,4 +63,7 @@ class Game {
         return winningCombinations;
     }
 
+    Player getWinner() {
+        return winner;
+    }
 }

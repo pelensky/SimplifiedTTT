@@ -18,10 +18,37 @@ class CLI {
     void gameLoop() {
         welcome();
         setUpGame();
-        printBoard();
+        while (!game.isGameOver()) {
+            printPlayersTurn();
+            printBoard();
+            takeTurn();
+        }
+        printOutcome();
+
     }
 
-      private void setUpGame() {
+    private void printOutcome() {
+        if (game.getWinner() != null) {
+            printWinner();
+        } else {
+            printTie();
+        }
+    }
+
+    private void printTie() {
+        out.println("The game was tied");
+    }
+
+    private void printWinner() {
+        out.println(game.getWinner().getMarker() + " is the winner!");
+    }
+
+    private void takeTurn() {
+        game.takeTurn();
+    }
+
+
+    private void setUpGame() {
         Board board = chooseBoardSize();
         Player player1 = choosePlayerType(1);
         Player player2 = choosePlayerType(2);
@@ -59,6 +86,10 @@ class CLI {
 
     int getNumber() {
         return in.nextInt();
+    }
+
+    private void printPlayersTurn() {
+        out.println(game.getCurrentPlayer().getMarker() + " take your turn");
     }
 
     private void printBoard() {
