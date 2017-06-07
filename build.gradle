@@ -8,7 +8,7 @@ apply plugin: 'application'
 
 version '1.0-SNAPSHOT'
 
-mainClassName = 'com.pelensky.simplifiedttt.TicTacToe'
+mainClassName = 'com.pelensky.simplifiedttt.App'
 
 sourceCompatibility = 1.8
 
