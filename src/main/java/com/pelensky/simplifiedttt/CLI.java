@@ -17,14 +17,24 @@ class CLI {
   }
 
   void run() {
-    welcome();
-    setUpGame();
+    startGame();
     while (!game.isGameOver()) {
-      printPlayersTurn();
-      printBoard();
-      takeTurn();
+      oneTurn();
     }
     printOutcome();
+  }
+
+  private void oneTurn() {
+    clearScreen();
+    printPlayersTurn();
+    printBoard();
+    takeTurn();
+  }
+
+  private void startGame() {
+    clearScreen();
+    welcome();
+    setUpGame();
   }
 
   private void printOutcome() {
@@ -55,6 +65,14 @@ class CLI {
     game = new Game(board, player1, player2);
   }
 
+  private String getMarker(int player) {
+    return player == 1 ? "X" : "O";
+  }
+
+  int getNumber() {
+    return in.nextInt();
+  }
+
   private Board chooseBoardSize() {
     printBoardSizeOptions();
     return new Board(getNumber());
@@ -68,24 +86,16 @@ class CLI {
     out.println("Tic Tac Toe");
   }
 
-  private Player choosePlayerType(int player) {
-    printPlayerSelectionOptions(player);
-    String marker = getMarker(player);
-    return getNumber() == 1 ? new HumanPlayer(this, marker) : new ComputerPlayer(marker);
-  }
-
   private void printPlayerSelectionOptions(int player) {
     out.println("Choose Player Type for Player " + player + ":");
     out.println("1) Human");
     out.println("2) Computer");
   }
 
-  private String getMarker(int player) {
-    return player == 1 ? "X" : "O";
-  }
-
-  int getNumber() {
-    return in.nextInt();
+  private Player choosePlayerType(int player) {
+    printPlayerSelectionOptions(player);
+    String marker = getMarker(player);
+    return getNumber() == 1 ? new HumanPlayer(this, marker) : new ComputerPlayer(marker);
   }
 
   private void printPlayersTurn() {
@@ -128,5 +138,11 @@ class CLI {
     }
     line.append("-").append(System.lineSeparator());
     return line.toString();
+  }
+
+  private void clearScreen() {
+    String CLEAR_SCREEN = "\033[H\033[2J";
+    out.print(CLEAR_SCREEN);
+    out.flush();
   }
 }
