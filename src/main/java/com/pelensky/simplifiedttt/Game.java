@@ -63,5 +63,4 @@ class Game {
         return winningCombinations;
     }
 
-
 }
