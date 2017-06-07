@@ -31,6 +31,12 @@ public class GameTest {
         assertEquals("X", game.showBoard().get(0));
     }
 
+    @Test
+    public void currentPlayerChangesAfterTurn() {
+        game.takeTurn(1);
+        assertEquals("O", game.getCurrentPlayer().getMarker());
+    }
+
 
 
 

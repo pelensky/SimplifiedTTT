@@ -16,15 +16,21 @@ class Game {
         this.currentPlayer = player1;
     }
 
+    void takeTurn(int space) {
+        board.placeMarker(space, currentPlayer.getMarker());
+        changeCurrentPlayer();
+    }
+
     Player getCurrentPlayer() {
         return currentPlayer;
     }
 
-    void takeTurn(int space) {
-        board.placeMarker(space, currentPlayer.getMarker());
-    }
-
     List<String> showBoard() {
         return board.getSpaces();
+    }
+
+    private void changeCurrentPlayer() {
+        currentPlayer =
+                (currentPlayer.equals(player1)) ? (currentPlayer = player2) : (currentPlayer = player1);
     }
 }
