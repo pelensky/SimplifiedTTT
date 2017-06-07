@@ -1,6 +1,7 @@
 package com.pelensky.simplifiedttt;
 
 import java.io.PrintStream;
+import java.util.List;
 import java.util.Scanner;
 
 class CLI {
@@ -8,6 +9,7 @@ class CLI {
     private final Scanner in;
     private final PrintStream out;
     private Game game;
+    private Board board;
 
 
     CLI(Scanner in, PrintStream out) {
@@ -47,9 +49,8 @@ class CLI {
         game.takeTurn();
     }
 
-
     private void setUpGame() {
-        Board board = chooseBoardSize();
+        board = chooseBoardSize();
         Player player1 = choosePlayerType(1);
         Player player2 = choosePlayerType(2);
         game = new Game(board, player1, player2);
@@ -93,11 +94,38 @@ class CLI {
     }
 
     private void printBoard() {
-        out.println("  1 |  2 |  3" + System.lineSeparator() +
-                "--------------" + System.lineSeparator() +
-                "  4 |  5 |  6" + System.lineSeparator() +
-                "--------------" + System.lineSeparator() +
-                "  7 |  8 |  9" );
+        StringBuilder boardOutput = new StringBuilder();
+        List<List<String>> rows = board.getRows();
+        for (int row = 0; row < rows.size() - 1; row ++) {
+            String rowText = formatRow(rows.get(row));
+            boardOutput.append(rowText).append(System.lineSeparator()).append(formatLine(rowText.length()));
+        }
+        boardOutput.append(formatRow(rows.get(rows.size() - 1))).append(System.lineSeparator());
+        out.println(boardOutput);
+    }
+
+    private String formatRow(List<String> row) {
+        String separator = " | ";
+        String offset = " ";
+        StringBuilder formattedRow = new StringBuilder(offset);
+        for (int space = 0; space < row.size() - 1; space ++) {
+            formattedRow.append(padSpace(offset, row.get(space))).append(separator);
+        }
+        formattedRow.append(padSpace(offset, row.get(row.size() - 1)));
+        return String.valueOf(formattedRow);
+    }
+
+    private String padSpace(String offset, String space) {
+        return space.length() == 1 ? offset + space : space;
+    }
+
+    private String formatLine(int length) {
+        StringBuilder line = new StringBuilder();
+        for (int character = 0; character < length; character++) {
+            line.append("-");
+        }
+        line.append("-").append(System.lineSeparator());
+        return line.toString();
     }
 
 }
