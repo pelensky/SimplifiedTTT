@@ -15,7 +15,7 @@ class CLI {
         this.out = out;
     }
 
-    void gameLoop() {
+    void run() {
         welcome();
         setUpGame();
         while (!game.isGameOver()) {

@@ -1,8 +1,6 @@
 package com.pelensky.simplifiedttt;
 
 
-import org.hamcrest.CoreMatchers;
-import org.hamcrest.MatcherAssert;
 import org.junit.Test;
 
 import java.io.ByteArrayOutputStream;
@@ -23,7 +21,7 @@ public class CLITest {
         output = new ByteArrayOutputStream();
         PrintStream out = new PrintStream(output);
         CLI cli = new CLI(in, out);
-        cli.gameLoop();
+        cli.run();
     }
 
     @Test
