@@ -1,6 +1,9 @@
 package com.pelensky.simplifiedttt;
 
 import org.junit.Before;
+import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
 
 public class GameTest {
 
@@ -16,5 +19,13 @@ public class GameTest {
         player2 = new HumanPlayer("O");
         game = new Game(board, player1, player2);
     }
+
+    @Test
+    public void player1StartsTheGame() {
+        assertEquals("X", game.getCurrentPlayer().getMarker());
+    }
+
+
+
 
 }
