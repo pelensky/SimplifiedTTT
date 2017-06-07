@@ -36,6 +36,20 @@ public class CLITest {
   }
 
   @Test
+  public void onlyIntegersAllowed() {
+    setUp("D " + xWins);
+    assertThat(output.toString(), containsString("Invalid Selection"));
+  }
+
+  @Test
+  public void onlyValidMoves() {
+    setUp("5 " + xWins);
+    assertThat(output.toString(), containsString("Invalid Selection"));
+  }
+
+
+
+  @Test
   public void choosePlayer1() {
     setUp(xWins);
     assertThat(
