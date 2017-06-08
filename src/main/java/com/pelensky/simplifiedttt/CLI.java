@@ -1,7 +1,6 @@
 package com.pelensky.simplifiedttt;
 
 import java.io.PrintStream;
-import java.lang.reflect.Array;
 import java.util.Arrays;
 import java.util.InputMismatchException;
 import java.util.List;
@@ -125,7 +124,7 @@ class CLI {
 
   private void printBoard() {
     StringBuilder boardOutput = new StringBuilder();
-    List<List<String>> rows = board.getRows();
+    List<List<String>> rows = board.splitRows();
     for (int row = 0; row < rows.size() - 1; row++) {
       String rowText = formatRow(rows.get(row));
       boardOutput
