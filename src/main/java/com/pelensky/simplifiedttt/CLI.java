@@ -92,12 +92,12 @@ class CLI {
     }
   }
 
-  private void printBoardSizeOptions() {
-    out.println("Choose Board Size: 3 or 4");
-  }
-
   private void welcome() {
     out.println("Tic Tac Toe");
+  }
+
+  private void printBoardSizeOptions() {
+    out.println("Choose Board Size: 3 or 4");
   }
 
   private void printPlayerSelectionOptions(int player) {
@@ -130,7 +130,7 @@ class CLI {
       boardOutput
           .append(rowText)
           .append(System.lineSeparator())
-          .append(formatLine(rowText.length()));
+          .append(formatSeparator(rowText.length()));
     }
     boardOutput.append(formatRow(rows.get(rows.size() - 1))).append(System.lineSeparator());
     out.println(boardOutput);
@@ -151,7 +151,7 @@ class CLI {
     return space.length() == 1 ? offset + space : space;
   }
 
-  private String formatLine(int length) {
+  private String formatSeparator(int length) {
     StringBuilder line = new StringBuilder();
     for (int character = 0; character < length; character++) {
       line.append("-");
