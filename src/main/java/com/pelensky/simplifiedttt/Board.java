@@ -49,7 +49,7 @@ class Board {
     spaces.set(space - 1, String.valueOf(space));
   }
 
-  List<List<String>> getRows() {
+  List<List<String>> splitRows() {
     List<List<String>> rows = new ArrayList<>(size);
     for (int i = 0; i < size; i++) {
       rows.add(new ArrayList<>(getSpaces().subList(i * size, (size * i) + size)));
@@ -57,30 +57,30 @@ class Board {
     return rows;
   }
 
-  List<List<String>> getColumns() {
+  List<List<String>> splitColumns() {
     List<List<String>> columns = new ArrayList<>(size);
     for (int i = 0; i < size; i++) {
       List<String> column = new ArrayList<>(size);
       for (int j = 0; j < size; j++) {
-        column.add(getRows().get(j).get(i));
+        column.add(splitRows().get(j).get(i));
       }
       columns.add(column);
     }
     return columns;
   }
 
-  List<String> getLeftDiagonal() {
+  List<String> splitLeftDiagonal() {
     List<String> leftDiagonal = new ArrayList<>(size);
     for (int i = 0; i < size; i++) {
-      leftDiagonal.add(getRows().get(i).get(i));
+      leftDiagonal.add(splitRows().get(i).get(i));
     }
     return leftDiagonal;
   }
 
-  List<String> getRightDiagonal() {
+  List<String> splitRightDiagonal() {
     List<String> rightDiagonal = new ArrayList<>(size);
     for (int i = 0; i < size; i++) {
-      rightDiagonal.add(getRows().get(i).get(size - (i + 1)));
+      rightDiagonal.add(splitRows().get(i).get(size - (i + 1)));
     }
     return rightDiagonal;
   }

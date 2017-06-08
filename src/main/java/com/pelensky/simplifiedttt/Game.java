@@ -29,9 +29,17 @@ class Game {
     return currentPlayer;
   }
 
+  Player getWinner() {
+    return winner;
+  }
+
+  int getTurnCount() {
+    return turnCount;
+  }
+
   void changeCurrentPlayer() {
     currentPlayer =
-        (currentPlayer.equals(player1)) ? (currentPlayer = player2) : (currentPlayer = player1);
+        currentPlayer.equals(player1) ? player2 : player1;
   }
 
   boolean isGameOver() {
@@ -58,18 +66,10 @@ class Game {
 
   private List<List<String>> winningCombinations() {
     List<List<String>> winningCombinations = new ArrayList<>();
-    winningCombinations.addAll(board.getRows());
-    winningCombinations.addAll(board.getColumns());
-    winningCombinations.add(board.getLeftDiagonal());
-    winningCombinations.add(board.getRightDiagonal());
+    winningCombinations.addAll(board.splitRows());
+    winningCombinations.addAll(board.splitColumns());
+    winningCombinations.add(board.splitLeftDiagonal());
+    winningCombinations.add(board.splitRightDiagonal());
     return winningCombinations;
-  }
-
-  Player getWinner() {
-    return winner;
-  }
-
-  int getTurnCount() {
-    return turnCount;
   }
 }

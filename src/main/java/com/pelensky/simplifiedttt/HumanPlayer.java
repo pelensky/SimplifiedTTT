@@ -17,6 +17,6 @@ class HumanPlayer implements Player {
 
   @Override
   public int chooseSpace(Game game) {
-    return cli.getNumber();
+    return cli.getNumber(game.board.getAvailableSpaces());
   }
 }

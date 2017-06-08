@@ -38,28 +38,38 @@ public class ComputerPlayer implements Player {
     } else {
       checkPossibilities(game, depth, bestScore);
       if (depth == 0) {
-        return getBestMove(bestScore);
+        return chooseBestMove(bestScore);
       } else {
-        return getTopScore(bestScore);
+        return getTopScoreInThisScenario(bestScore);
       }
     }
   }
 
-  private void checkPossibilities(Game game, int depth, Map<Integer, Integer> bestScore) {
+  private void checkPossibilities(Game game, int depth, Map<Integer, Integer> potentialOutcomes) {
     for (int space : game.board.getAvailableSpaces()) {
-      game.board.placeMarker(space, game.getCurrentPlayer().getMarker());
-      game.changeCurrentPlayer();
-      bestScore.put(space, (-1 * calculateBestMove(game, depth + 1, new HashMap<>())));
-      game.board.resetSpace(space);
-      game.changeCurrentPlayer();
+      emulateTurn(game, space);
+      addPossibilityToOutcomes(game, depth, potentialOutcomes, space);
+      resetBoard(game, space);
     }
   }
 
-  private int getBestMove(Map<Integer, Integer> bestScore) {
+  private void emulateTurn(Game game, int space) {
+    game.board.placeMarker(space, game.getCurrentPlayer().getMarker());
+    game.changeCurrentPlayer();
+  }
+  private void addPossibilityToOutcomes(Game game, int depth, Map<Integer, Integer> bestScore, int space) {
+    bestScore.put(space, (-1 * calculateBestMove(game, depth + 1, new HashMap<>())));
+  }
+  private void resetBoard(Game game, int space) {
+    game.board.resetSpace(space);
+    game.changeCurrentPlayer();
+  }
+
+  private int chooseBestMove(Map<Integer, Integer> bestScore) {
     return bestScore.entrySet().stream().max(Map.Entry.comparingByValue()).get().getKey();
   }
 
-  private int getTopScore(Map<Integer, Integer> bestScore) {
+  private int getTopScoreInThisScenario(Map<Integer, Integer> bestScore) {
     return bestScore.entrySet().stream().max(Map.Entry.comparingByValue()).get().getValue();
   }
 

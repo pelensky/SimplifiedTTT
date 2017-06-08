@@ -1,6 +1,8 @@
 package com.pelensky.simplifiedttt;
 
 import java.io.PrintStream;
+import java.util.Arrays;
+import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
 
@@ -24,17 +26,17 @@ class CLI {
     printOutcome();
   }
 
-  private void oneTurn() {
-    clearScreen();
-    printPlayersTurn();
-    printBoard();
-    takeTurn();
-  }
-
   private void startGame() {
     clearScreen();
     welcome();
     setUpGame();
+  }
+
+  private void oneTurn() {
+    clearScreen();
+    printPlayersTurn();
+    printBoard();
+    game.takeTurn();
   }
 
   private void printOutcome() {
@@ -46,18 +48,6 @@ class CLI {
     printBoard();
   }
 
-  private void printTie() {
-    out.println("The game was tied");
-  }
-
-  private void printWinner() {
-    out.println(game.getWinner().getMarker() + " is the winner!");
-  }
-
-  private void takeTurn() {
-    game.takeTurn();
-  }
-
   private void setUpGame() {
     board = chooseBoardSize();
     Player player1 = choosePlayerType(1);
@@ -65,25 +55,49 @@ class CLI {
     game = new Game(board, player1, player2);
   }
 
+  private Board chooseBoardSize() {
+    printBoardSizeOptions();
+    List<Integer> validOptions = Arrays.asList(3,4);
+    return new Board(getNumber(validOptions));
+  }
+
+  private Player choosePlayerType(int player) {
+    printPlayerSelectionOptions(player);
+    String marker = getMarker(player);
+    List<Integer> validOptions = Arrays.asList(1,2);
+    return getNumber(validOptions) == 1 ? new HumanPlayer(this, marker) : new ComputerPlayer(marker);
+  }
+
   private String getMarker(int player) {
     return player == 1 ? "X" : "O";
   }
 
-  int getNumber() {
-    return in.nextInt();
+  int getNumber(List<Integer> validOptions) {
+    int selection = checkInteger();
+    if (validOptions.contains(selection)) {
+      return selection;
+    } else {
+      printInvalidSelection();
+      return getNumber(validOptions);
+    }
   }
 
-  private Board chooseBoardSize() {
-    printBoardSizeOptions();
-    return new Board(getNumber());
-  }
-
-  private void printBoardSizeOptions() {
-    out.println("Choose Board Size: 3 or 4");
+  private int checkInteger() {
+    try {
+      return in.nextInt();
+    } catch (InputMismatchException e) {
+      printInvalidSelection();
+      in.next();
+      return checkInteger();
+    }
   }
 
   private void welcome() {
     out.println("Tic Tac Toe");
+  }
+
+  private void printBoardSizeOptions() {
+    out.println("Choose Board Size: 3 or 4");
   }
 
   private void printPlayerSelectionOptions(int player) {
@@ -92,25 +106,31 @@ class CLI {
     out.println("2) Computer");
   }
 
-  private Player choosePlayerType(int player) {
-    printPlayerSelectionOptions(player);
-    String marker = getMarker(player);
-    return getNumber() == 1 ? new HumanPlayer(this, marker) : new ComputerPlayer(marker);
-  }
-
   private void printPlayersTurn() {
     out.println(game.getCurrentPlayer().getMarker() + " take your turn");
   }
 
+  private void printWinner() {
+    out.println(game.getWinner().getMarker() + " is the winner!");
+  }
+
+  private void printTie() {
+    out.println("The game was tied");
+  }
+
+  private void printInvalidSelection() {
+    out.println("Invalid Selection");
+  }
+
   private void printBoard() {
     StringBuilder boardOutput = new StringBuilder();
-    List<List<String>> rows = board.getRows();
+    List<List<String>> rows = board.splitRows();
     for (int row = 0; row < rows.size() - 1; row++) {
       String rowText = formatRow(rows.get(row));
       boardOutput
           .append(rowText)
           .append(System.lineSeparator())
-          .append(formatLine(rowText.length()));
+          .append(formatSeparator(rowText.length()));
     }
     boardOutput.append(formatRow(rows.get(rows.size() - 1))).append(System.lineSeparator());
     out.println(boardOutput);
@@ -131,7 +151,7 @@ class CLI {
     return space.length() == 1 ? offset + space : space;
   }
 
-  private String formatLine(int length) {
+  private String formatSeparator(int length) {
     StringBuilder line = new StringBuilder();
     for (int character = 0; character < length; character++) {
       line.append("-");

@@ -12,8 +12,7 @@ import static org.junit.Assert.assertThat;
 public class CLITest {
 
   private ByteArrayOutputStream output;
-  private String xWins = "3 1 1 1 9 2 8 3";
-  private String tiedGame = " 3 1 1 1 5 4 7 3 2 8 9 6";
+  private final String xWins = "3 1 1 1 9 2 8 3";
 
   public void setUp(String text) {
     Scanner in = new Scanner(text);
@@ -34,6 +33,20 @@ public class CLITest {
     setUp(xWins);
     assertThat(output.toString(), containsString("Choose Board Size: 3 or 4"));
   }
+
+  @Test
+  public void onlyIntegersAllowed() {
+    setUp("D " + xWins);
+    assertThat(output.toString(), containsString("Invalid Selection"));
+  }
+
+  @Test
+  public void onlyValidMoves() {
+    setUp("5 " + xWins);
+    assertThat(output.toString(), containsString("Invalid Selection"));
+  }
+
+
 
   @Test
   public void choosePlayer1() {
@@ -88,6 +101,7 @@ public class CLITest {
 
   @Test
   public void printTie() {
+    final String tiedGame = " 3 1 1 1 5 4 7 3 2 8 9 6";
     setUp(tiedGame);
     assertThat(output.toString(), containsString("The game was tied"));
   }

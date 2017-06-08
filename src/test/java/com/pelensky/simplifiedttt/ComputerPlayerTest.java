@@ -4,6 +4,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 public class ComputerPlayerTest {
   private ComputerPlayer player1;
@@ -58,6 +59,15 @@ public class ComputerPlayerTest {
   public void computerOWinsGameIfItGetsTheOpportunity3() {
     setUpBoard("1X3O4O5O7X9X");
     assertEquals(8, player1.chooseSpace(game));
+  }
+
+  @Test
+  public void fourPlayerBoard() {
+    board = new Board(4);
+    game = new Game(board, player1, player2);
+    int random = player1.chooseSpace(game);
+    assertTrue(random > 0);
+    assertTrue(random < 17);
   }
 
   private void setUpBoard(String move) {
