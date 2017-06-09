@@ -20,13 +20,9 @@ public class ComputerPlayer implements Player {
 
   @Override
   public int chooseSpace(Game game) {
-    if (game.board.getAvailableSpaces().size() < 5 && game.board.getSpaces().size() > 9) {
-      return chooseRandomSpace(game);
-    } else {
       Map<Integer, Integer> bestScore = new HashMap<>();
       return calculateBestMove(game, 0, bestScore);
     }
-  }
 
   private int calculateBestMove(Game game, int depth, Map<Integer, Integer> potentialOutcomes) {
     int TIEDGAME = 0;
@@ -73,8 +69,4 @@ public class ComputerPlayer implements Player {
     return potentialOutcomes.entrySet().stream().max(Map.Entry.comparingByValue()).get().getValue();
   }
 
- int chooseRandomSpace(Game game) {
-    List<Integer> spaces = game.board.getAvailableSpaces();
-    return spaces.get(new Random().nextInt(spaces.size()));
-  }
 }
