@@ -43,6 +43,7 @@ class CLI {
   }
 
   private void printOutcome() {
+    clearScreen();
     if (game.getWinner() != null) {
       printWinner();
     } else {
@@ -164,5 +165,10 @@ class CLI {
   private void clearScreen() {
     out.print(CLEAR_SCREEN);
     out.flush();
+  }
+
+  public static void main(String[] args) {
+    CLI cli = new CLI(new Scanner(System.in), new PrintStream(System.out));
+    cli.run();
   }
 }
