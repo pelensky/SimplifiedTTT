@@ -15,7 +15,7 @@ There are two types of players, and a game can be played by any combination of t
 1. Human
 2. Computer
 
-Note: At this stage the Minimax algorithm is running very slow on a 4x4 board. It would be better to play on a 3x3 board if you are playing against a computer.
+Note: At this stage the Minimax algorithm is running very slow on a 4x4 board. It would be advisable to play on a 3x3 board if you are playing against a computer.
 
 #### Prerequisites 
 1. Install [Java](http://www.oracle.com/technetwork/java/javase/downloads/index.html)
