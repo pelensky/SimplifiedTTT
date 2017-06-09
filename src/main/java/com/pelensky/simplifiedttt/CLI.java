@@ -12,6 +12,9 @@ class CLI {
   private final PrintStream out;
   private Game game;
   private Board board;
+  private final String CLEAR_SCREEN = "\033[H\033[2J";
+  private final String SEPARATOR = " | ";
+  private final String OFFSET = " ";
 
   CLI(Scanner in, PrintStream out) {
     this.in = in;
@@ -40,6 +43,7 @@ class CLI {
   }
 
   private void printOutcome() {
+    clearScreen();
     if (game.getWinner() != null) {
       printWinner();
     } else {
@@ -137,13 +141,11 @@ class CLI {
   }
 
   private String formatRow(List<String> row) {
-    String separator = " | ";
-    String offset = " ";
-    StringBuilder formattedRow = new StringBuilder(offset);
+    StringBuilder formattedRow = new StringBuilder(OFFSET);
     for (int space = 0; space < row.size() - 1; space++) {
-      formattedRow.append(padSpace(offset, row.get(space))).append(separator);
+      formattedRow.append(padSpace(OFFSET, row.get(space))).append(SEPARATOR);
     }
-    formattedRow.append(padSpace(offset, row.get(row.size() - 1)));
+    formattedRow.append(padSpace(OFFSET, row.get(row.size() - 1)));
     return String.valueOf(formattedRow);
   }
 
@@ -161,8 +163,12 @@ class CLI {
   }
 
   private void clearScreen() {
-    String CLEAR_SCREEN = "\033[H\033[2J";
     out.print(CLEAR_SCREEN);
     out.flush();
+  }
+
+  public static void main(String[] args) {
+    CLI cli = new CLI(new Scanner(System.in), new PrintStream(System.out));
+    cli.run();
   }
 }

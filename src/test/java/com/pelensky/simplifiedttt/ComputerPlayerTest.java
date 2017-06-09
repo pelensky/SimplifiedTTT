@@ -61,15 +61,6 @@ public class ComputerPlayerTest {
     assertEquals(8, player1.chooseSpace(game));
   }
 
-  @Test
-  public void fourPlayerBoard() {
-    board = new Board(4);
-    game = new Game(board, player1, player2);
-    int random = player1.chooseSpace(game);
-    assertTrue(random > 0);
-    assertTrue(random < 17);
-  }
-
   private void setUpBoard(String move) {
     for (int turn = 0; turn < move.length(); turn += 2) {
       Integer space = Character.getNumericValue(move.charAt(turn));
