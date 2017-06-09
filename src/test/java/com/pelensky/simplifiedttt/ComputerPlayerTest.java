@@ -65,7 +65,7 @@ public class ComputerPlayerTest {
   public void fourPlayerBoard() {
     board = new Board(4);
     game = new Game(board, player1, player2);
-    int random = player1.chooseSpace(game);
+    int random = player1.chooseRandomSpace(game);
     assertTrue(random > 0);
     assertTrue(random < 17);
   }

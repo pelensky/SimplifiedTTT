@@ -18,6 +18,8 @@ public class ComputerPlayer implements Player {
     return marker;
   }
 
+
+
   @Override
   public int chooseSpace(Game game) {
     if (game.getTurnCount() < 5 && game.board.getSpaces().size() > 9) {
@@ -28,19 +30,21 @@ public class ComputerPlayer implements Player {
     }
   }
 
-  private int calculateBestMove(Game game, int depth, Map<Integer, Integer> bestScore) {
-    int tiedGame = 0;
-    int wonGame = -1;
+
+
+  private int calculateBestMove(Game game, int depth, Map<Integer, Integer> potentialOutcomes) {
+    int TIEDGAME = 0;
+    int WONGAME = -1;
     if (game.isGameTied()) {
-      return tiedGame;
+      return TIEDGAME;
     } else if (game.isGameOver()) {
-      return wonGame;
+      return WONGAME;
     } else {
-      checkPossibilities(game, depth, bestScore);
+      checkPossibilities(game, depth, potentialOutcomes);
       if (depth == 0) {
-        return chooseBestMove(bestScore);
+        return chooseBestMove(potentialOutcomes);
       } else {
-        return getTopScoreInThisScenario(bestScore);
+        return getTopScoreInThisScenario(potentialOutcomes);
       }
     }
   }
@@ -57,23 +61,23 @@ public class ComputerPlayer implements Player {
     game.board.placeMarker(space, game.getCurrentPlayer().getMarker());
     game.changeCurrentPlayer();
   }
-  private void addPossibilityToOutcomes(Game game, int depth, Map<Integer, Integer> bestScore, int space) {
-    bestScore.put(space, (-1 * calculateBestMove(game, depth + 1, new HashMap<>())));
+  private void addPossibilityToOutcomes(Game game, int depth, Map<Integer, Integer> potentialOutcomes, int space) {
+    potentialOutcomes.put(space, (-1 * calculateBestMove(game, depth + 1, new HashMap<>())));
   }
   private void resetBoard(Game game, int space) {
     game.board.resetSpace(space);
     game.changeCurrentPlayer();
   }
 
-  private int chooseBestMove(Map<Integer, Integer> bestScore) {
-    return bestScore.entrySet().stream().max(Map.Entry.comparingByValue()).get().getKey();
+  private int chooseBestMove(Map<Integer, Integer> potentialOutcomes) {
+    return potentialOutcomes.entrySet().stream().max(Map.Entry.comparingByValue()).get().getKey();
   }
 
-  private int getTopScoreInThisScenario(Map<Integer, Integer> bestScore) {
-    return bestScore.entrySet().stream().max(Map.Entry.comparingByValue()).get().getValue();
+  private int getTopScoreInThisScenario(Map<Integer, Integer> potentialOutcomes) {
+    return potentialOutcomes.entrySet().stream().max(Map.Entry.comparingByValue()).get().getValue();
   }
 
-  private int chooseRandomSpace(Game game) {
+ int chooseRandomSpace(Game game) {
     List<Integer> spaces = game.board.getAvailableSpaces();
     return spaces.get(new Random().nextInt(spaces.size()));
   }
