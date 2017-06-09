@@ -5,7 +5,7 @@ import java.util.List;
 
 class Board {
   private final int size;
-  private final int offset = 1;
+  private final int OFFSET = 1;
   List<String> spaces;
 
   Board(int size) {
@@ -15,7 +15,7 @@ class Board {
 
   void placeMarker(int space, String marker) {
     if (isSpaceAvailable(space)) {
-      spaces.set(space - offset, marker);
+      spaces.set(space - OFFSET, marker);
     }
   }
 
@@ -25,7 +25,7 @@ class Board {
 
   private List<String> setUpBoard(int size) {
     List<String> spaces = new ArrayList<>();
-    for (int i = offset; i < size * size + offset; i++) {
+    for (int i = OFFSET; i < size * size + OFFSET; i++) {
       spaces.add(String.valueOf(i));
     }
     return spaces;
@@ -33,7 +33,7 @@ class Board {
 
   List<Integer> getAvailableSpaces() {
     List<Integer> availableSpaces = new ArrayList<>();
-    for (int i = offset; i < getSpaces().size() + offset; i++) {
+    for (int i = OFFSET; i < getSpaces().size() + OFFSET; i++) {
       if (isSpaceAvailable(i)) {
         availableSpaces.add(i);
       }
@@ -42,7 +42,7 @@ class Board {
   }
 
   private boolean isSpaceAvailable(int space) {
-    return getSpaces().get(space - offset).equals(String.valueOf(space));
+    return getSpaces().get(space - OFFSET).equals(String.valueOf(space));
   }
 
   void resetSpace(int space) {

@@ -18,8 +18,6 @@ public class ComputerPlayer implements Player {
     return marker;
   }
 
-
-
   @Override
   public int chooseSpace(Game game) {
     if (game.board.getAvailableSpaces().size() < 5 && game.board.getSpaces().size() > 9) {

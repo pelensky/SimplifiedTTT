@@ -12,6 +12,9 @@ class CLI {
   private final PrintStream out;
   private Game game;
   private Board board;
+  private final String CLEAR_SCREEN = "\033[H\033[2J";
+  private final String separator = " | ";
+  private final String offset = " ";
 
   CLI(Scanner in, PrintStream out) {
     this.in = in;
@@ -137,8 +140,6 @@ class CLI {
   }
 
   private String formatRow(List<String> row) {
-    String separator = " | ";
-    String offset = " ";
     StringBuilder formattedRow = new StringBuilder(offset);
     for (int space = 0; space < row.size() - 1; space++) {
       formattedRow.append(padSpace(offset, row.get(space))).append(separator);
@@ -161,7 +162,6 @@ class CLI {
   }
 
   private void clearScreen() {
-    String CLEAR_SCREEN = "\033[H\033[2J";
     out.print(CLEAR_SCREEN);
     out.flush();
   }
